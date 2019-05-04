@@ -1,0 +1,15 @@
+tn\esprit\timesheet\entities\Entreprise.class
+tn\esprit\timesheet\services\impl\EntrepriseService.class
+tn\esprit\timesheet\entities\Contrat.class
+tn\esprit\timesheet\entities\MissionExterne.class
+tn\esprit\timesheet\entities\Timesheet.class
+tn\esprit\timesheet\entities\Departement.class
+tn\esprit\timesheet\entities\Role.class
+tn\esprit\timesheet\entities\Employe.class
+tn\esprit\timesheet\entities\Mission.class
+tn\esprit\timesheet\services\interfaces\TimesheetServiceRemote.class
+tn\esprit\timesheet\services\interfaces\EmployeServiceRemote.class
+tn\esprit\timesheet\services\impl\EmployeService.class
+tn\esprit\timesheet\services\impl\TimesheetService.class
+tn\esprit\timesheet\services\interfaces\EntrepriseServiceRemote.class
+tn\esprit\timesheet\entities\TimesheetPK.class
