@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+	<h:form>
+	<br/>
+		<p:growl id="messages" showDetail="true" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+
+
+
+			<h:outputText value="Ajax Rate:" />
+			<p:rating value="#{ratingView.rating3}">
+				<p:ajax event="rate" listener="#{ratingView.onrate}"
+					update="messages" />
+				<p:ajax event="cancel" listener="#{ratingView.oncancel}"
+					update="messages" />
+			</p:rating>
+			<h:outputText value="Username" />
+<h:inputText value="#{ratingView.username}"/>
+
+		</h:panelGrid>
+
+		<p:commandButton value="Submit" update="display"
+			oncomplete="PF('dlg').show()" style="margin:5px"
+			action="#{ratingView.add()}" />
+
+		<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
+			hideEffect="fade">
+			<h:panelGrid id="display" columns="2" cellpadding="5">
+
+
+				<h:outputText value="Rating 3:" />
+				<h:outputText value="#{ratingView.rating3}" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+	</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="tem.xhtml"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui">
+<ui:param name="page_name" value="Accueil" />
+<ui:define name="content">
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js">    </script>
+<script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.min.js">
+</script>
+<script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.js">
+</script>
+<script>
+defaut = $('#contenu').html();
+$(document).ready( function() {
+  // détection de la saisie dans le champ de recherche
+  $('#search').keyup( function(){
+    $field = $(this);
+ 
+    if( $field.val().length >= 1 )
+    {
+	// le traitement de la recherche que je ne trouve pas
+
+		var maRegExp = new RegExp($('#search').val()); // expression régulière en fonction de l'entrée
+		var divs = $('div#contenu div'); // toutes les div en dessous de #contenu
+		
+		for(i=0;i &lt;divs.size();i++)
+		{
+			if(maRegExp.test(divs[i].id))
+			{ // test de la regexp
+				divs[i].style.display = "block"; // afficher    
+			}
+			else
+			{
+				divs[i].style.display = "none"; // cacher
+			}
+		}
+         
+    }
+
+    else
+    {
+	$('#contenu').html(defaut); // defaut est une variable contenant mon code à la base, càd toutes les div
+    }
+  });
+});
+</script>
+   
+	<input type="text" name="search" id="search"/>
+</head>
+<body>
+<h:form>
+<table border="1">
+<br></br>
+<tr>
+<td>
+Titre
+</td>
+<td>
+Category
+</td>
+
+<td>
+Date Debut
+</td>
+<td>
+Date Fin
+</td>
+<td>
+Image
+</td>
+<td>
+Lieu
+</td>
+<td>
+Description
+</td>
+<td>
+Nombre de place 
+</td>
+<td>
+Nombre de place restant
+</td>
+<td>
+Participer
+</td>
+</tr>
+<c:forEach items="#{event.getEvent()}" var="ev">
+<tr>                                  
+<td>
+<h:outputText value="${ev.get('Titre')}" />
+</td>
+
+<td>
+
+<c:if test="#{ev.get('Categorie')==0}">
+  
+
+<h:outputText value="Business" />
+
+</c:if>
+
+<c:if test="#{ev.get('Categorie')==1}">
+  
+
+<h:outputText value="Entertainement" />
+
+</c:if>
+<c:if test="#{ev.get('Categorie')==2}">
+  
+
+<h:outputText value="Occasion" />
+
+</c:if>
+<c:if test="#{ev.get('Categorie')==3}">
+  
+
+<h:outputText value="Culture" />
+
+</c:if>
+</td>
+ <td>
+<h:outputText value="${ev.get('DateDebut')}" />
+
+
+</td>
+ <td>
+<h:outputText value="${ev.get('DateFin')}" />
+
+
+</td>
+ <td>
+
+<img src="http://localhost:50065/Content/images/${ev.get('Image')}"  />
+
+</td>
+ <td>
+<h:outputText value="${ev.get('Lieu')}" />
+
+
+</td>
+ <td>
+<h:outputText value="${ev.get('Description')}" />
+
+
+</td>
+
+
+
+<td>
+<h:outputText value="${ev.get('Nbrplace')}" />
+
+
+</td>
+<td>
+<h:outputText value="${event.calc((ev.get('Nbrplace')) ,event.nbrRes(ev.get('EventID')))}" />
+
+
+</td>
+<c:if test="${event.calc((ev.get('Nbrplace')) ,event.nbrRes(ev.get('EventID'))) != 0}">
+
+<td>
+
+<c:if test="#{event.IsReserved(ev.get('EventID')) == 'true'}">
+  
+
+<h:commandButton action="#{event.DeleteRes(ev.get('EventID'))}" value="annuler reservation" />
+
+</c:if>
+<c:if test="#{event.IsReserved(ev.get('EventID'))=='false'}">
+  
+
+<h:commandButton action="#{event.Reserver(ev.get('EventID'))}" value="reserver" />
+
+</c:if>
+
+</td>
+</c:if>
+
+</tr>
+
+
+</c:forEach>
+</table>
+
+
+
+</h:form>
+</body>
+
+</ui:define>
+</ui:composition>

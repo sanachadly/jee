@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+
+>
+
+<body>
+<h:form >
+<table>
+<tr>
+<td>
+<h:outputText value="Titre" />
+</td>
+<td>
+ <h:inputText value="#{event.titre}" />
+ </td>
+</tr>
+<tr>
+<td>
+<h:outputText value="Description" /> 
+</td>
+<td>
+<h:inputText value="#{event.desc}" />
+ </td>
+</tr>
+
+<tr>
+<td>
+<h:outputText value="Lieu" /> 
+</td>
+<td>
+<h:inputText value="#{event.lieu}" />
+ </td>
+</tr>
+
+
+<tr>
+<td>
+<h:outputText value="Date debut" /> 
+</td>
+<td>
+  <h:inputText id = "dateInput" value = "#{event.dated}"
+            label = "Date" >
+            <f:convertDateTime pattern = "dd-mm-yyyy" />
+         </h:inputText> </td>
+</tr>
+
+<tr>
+<td>
+<h:outputText value="Date Fin" /> 
+</td>
+<td>
+  <h:inputText id = "dateInputt" value = "#{event.datef}"
+            label = "Date" >
+            <f:convertDateTime pattern = "dd-mm-yyyy" />
+         </h:inputText> </td>
+</tr>
+
+<tr>
+<td>
+<h:outputText value="Image" /> 
+</td>
+<td>
+
+
+
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+<h:commandButton value="Add" action="#{event.add()}" />
+<h:commandButton value="Cancel" action="#{reclamation.redirectMyRec()}" />
+</td>
+</tr>
+<tr>
+ <h:inputFile id="file"  value="#{event.img}"/> 
+</tr>
+</table>
+
+</h:form>
+</body>
+</html>
